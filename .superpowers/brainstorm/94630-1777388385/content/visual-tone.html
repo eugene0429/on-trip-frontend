@@ -1,0 +1,206 @@
+<h2>UI/UX 무드 — 4가지 방향 중에 골라주세요</h2>
+<p class="subtitle">"귀엽고 풋풋한 여행 느낌"을 4가지로 풀어봤습니다. 클릭해서 마음에 드는 방향을 선택하세요.</p>
+
+<style>
+  .tone-card {
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .tone-card:hover { transform: translateY(-4px); }
+  .tone-preview {
+    height: 280px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .tone-name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .tone-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+  .pin {
+    width: 36px; height: 44px;
+    border-radius: 18px 18px 18px 4px;
+    transform: rotate(-12deg);
+    position: relative;
+  }
+  .pin::after {
+    content: ''; position: absolute;
+    width: 14px; height: 14px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    top: 11px; left: 11px;
+  }
+  .map-bubble {
+    position: absolute; padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 11px; font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    padding: 6px 12px; border-radius: 14px;
+    font-size: 12px; font-weight: 600;
+  }
+
+  /* A — 파스텔 마카롱 */
+  .tone-a { background: linear-gradient(135deg, #FFF5F2 0%, #F4E5FF 100%); color: #4A3F5C; }
+  .tone-a .pin { background: #FFB5A7; box-shadow: 0 4px 12px rgba(255,181,167,0.5); }
+  .tone-a .map-bubble { background: #ffffff; color: #FF8B7A; }
+  .tone-a .chip { background: #FFE5DD; color: #E07059; }
+  .tone-a .chip.alt { background: #E8DAFF; color: #8866CC; }
+
+  /* B — 키치 스티커 */
+  .tone-b { background: #FFFCEB; color: #2A2A2A; border: 3px solid #2A2A2A; }
+  .tone-b .pin {
+    background: #FF5A5A; border: 3px solid #2A2A2A;
+    box-shadow: 4px 4px 0 #2A2A2A;
+  }
+  .tone-b .map-bubble {
+    background: #FFE066; color: #2A2A2A;
+    border: 2.5px solid #2A2A2A;
+    box-shadow: 3px 3px 0 #2A2A2A;
+  }
+  .tone-b .chip {
+    background: #B5E48C; color: #2A2A2A;
+    border: 2px solid #2A2A2A;
+  }
+  .tone-b .chip.alt { background: #FFB3D9; }
+
+  /* C — 폴라로이드 빈티지 */
+  .tone-c { background: #F3EBDD; color: #5C4A3A; }
+  .tone-c .pin { background: #C97B5C; box-shadow: 0 4px 10px rgba(201,123,92,0.4); }
+  .tone-c .map-bubble {
+    background: #FFFEF8; color: #5C4A3A;
+    border: 1px solid rgba(92,74,58,0.15);
+    transform: rotate(-2deg);
+    font-family: Georgia, serif;
+  }
+  .tone-c .chip {
+    background: rgba(201,123,92,0.15);
+    color: #8B5E3C; font-family: Georgia, serif;
+  }
+  .tone-c .chip.alt {
+    background: rgba(94,128,75,0.15); color: #5E804B;
+  }
+
+  /* D — 캐릭터 카카오프렌즈식 */
+  .tone-d { background: linear-gradient(180deg, #FFF8DC 0%, #FFEAA7 100%); color: #3D2914; }
+  .tone-d .pin {
+    background: #FFC845;
+    box-shadow: 0 4px 12px rgba(255,200,69,0.5);
+    border: 2.5px solid #fff;
+  }
+  .tone-d .map-bubble {
+    background: #ffffff; color: #FF6B35;
+    border-radius: 18px;
+    font-weight: 700;
+  }
+  .tone-d .chip {
+    background: #FFE4A0; color: #C8841C;
+    border-radius: 16px;
+  }
+  .tone-d .chip.alt {
+    background: #FFD3D3; color: #D14545;
+  }
+
+  .blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(20px); opacity: 0.5;
+  }
+  .mascot {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+  }
+</style>
+
+<div class="cards">
+  <div class="card" data-choice="pastel" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="tone-preview tone-a">
+        <div class="blob" style="background:#FFB5A7; width:100px; height:100px; top:-20px; right:-20px;"></div>
+        <div class="blob" style="background:#C8B0FF; width:80px; height:80px; bottom:-10px; left:30px;"></div>
+        <div class="map-bubble" style="top:50px; left:30px;">📍 광안리 · 24명</div>
+        <div class="map-bubble" style="top:90px; right:40px;">📍 해운대 · 41명</div>
+        <div class="pin" style="margin: 60px auto 0;"></div>
+        <div class="chip-row">
+          <span class="chip">맛집투어</span>
+          <span class="chip alt">사진찍기</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A · 파스텔 마카롱</h3>
+      <p>살구·라벤더·민트의 부드러운 그라데이션. 둥글둥글한 타이포, 손그림 같은 일러스트.<br><strong>핵심 인상:</strong> 따뜻하고 안전한 느낌, 여성 사용자 친화적</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="kitsch" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="tone-preview tone-b">
+        <div class="map-bubble" style="top:50px; left:30px;">📍 광안리 · 24명</div>
+        <div class="map-bubble" style="top:90px; right:40px;">📍 해운대 · 41명</div>
+        <div class="pin" style="margin: 60px auto 0;"></div>
+        <div class="chip-row">
+          <span class="chip">맛집투어</span>
+          <span class="chip alt">사진찍기</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B · 키치 스티커</h3>
+      <p>두꺼운 검은 라인 + 비비드 컬러 + 그림자 박힌 스티커. 90s 일러스트 무드.<br><strong>핵심 인상:</strong> 위트있고 트렌디, Z세대·SNS 친화적</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="polaroid" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="tone-preview tone-c">
+        <div class="map-bubble" style="top:50px; left:30px;">📍 광안리 · 24명</div>
+        <div class="map-bubble" style="top:90px; right:40px; transform: rotate(2deg);">📍 해운대 · 41명</div>
+        <div class="pin" style="margin: 60px auto 0;"></div>
+        <div class="chip-row">
+          <span class="chip">맛집투어</span>
+          <span class="chip alt">사진찍기</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C · 폴라로이드 빈티지</h3>
+      <p>크림+테라코타+세이지의 따뜻한 톤. 약간 기울어진 카드, 종이 질감, 세리프 폰트.<br><strong>핵심 인상:</strong> 감성 여행 일기, 무드보드 느낌</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="character" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="tone-preview tone-d">
+        <div class="map-bubble" style="top:50px; left:30px;">📍 광안리 · 24명</div>
+        <div class="map-bubble" style="top:90px; right:40px;">📍 해운대 · 41명</div>
+        <div style="display:flex; align-items:center; gap:14px; margin-top: 36px;">
+          <div class="mascot" style="background:#FFC845;">🐻</div>
+          <div class="pin"></div>
+          <div class="mascot" style="background:#FF9999;">🐰</div>
+        </div>
+        <div class="chip-row">
+          <span class="chip">맛집투어</span>
+          <span class="chip alt">사진찍기</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>D · 캐릭터 마스코트</h3>
+      <p>전용 마스코트(곰·토끼 등) 캐릭터, 노랑+오렌지 친근한 컬러. 카카오프렌즈/라인프렌즈 스타일.<br><strong>핵심 인상:</strong> 대중적, 가벼운 진입감, 굿즈 IP 확장 가능</p>
+    </div>
+  </div>
+</div>
