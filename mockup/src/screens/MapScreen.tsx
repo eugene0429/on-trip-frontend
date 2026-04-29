@@ -1,4 +1,5 @@
-import { Bell, User, Crosshair, Rocket } from 'lucide-react';
+import { Bell, Store, Megaphone, Crosshair, Rocket } from 'lucide-react';
+import { TabKey } from '../components/TabBar';
 import StickerCard from '../components/StickerCard';
 import StickerButton from '../components/StickerButton';
 import PinMarker from '../components/PinMarker';
@@ -8,20 +9,24 @@ import { regions } from '../data/regions';
 
 export type MapScreenProps = {
   onPinTap?: (regionId: string) => void;
+  onTab?: (key: TabKey) => void;
 };
 
-export default function MapScreen({ onPinTap }: MapScreenProps) {
+export default function MapScreen({ onPinTap, onTab }: MapScreenProps) {
   return (
     <div className="relative w-full h-full overflow-hidden">
       <div className="absolute top-3 left-3 right-3 z-30 flex items-center justify-between">
         <Chip bg="bg-primary"><span className="font-extrabold tracking-tight">On-Trip</span></Chip>
         <div className="flex gap-2">
-          <StickerCard offset="xs" rounded="pill" className="w-9 h-9 flex items-center justify-center relative">
+          <StickerCard offset="xs" rounded="pill" pressable className="w-9 h-9 flex items-center justify-center relative">
             <Bell size={18} color="#2A2A2A" />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accentRed rounded-pill border-[1.5px] border-outline" />
           </StickerCard>
-          <StickerCard offset="xs" rounded="pill" className="w-9 h-9 flex items-center justify-center">
-            <User size={18} color="#2A2A2A" />
+          <StickerCard offset="xs" rounded="pill" pressable className="w-9 h-9 flex items-center justify-center">
+            <Store size={18} color="#2A2A2A" />
+          </StickerCard>
+          <StickerCard offset="xs" rounded="pill" pressable className="w-9 h-9 flex items-center justify-center">
+            <Megaphone size={18} color="#2A2A2A" />
           </StickerCard>
         </div>
       </div>
@@ -54,7 +59,7 @@ export default function MapScreen({ onPinTap }: MapScreenProps) {
         </StickerButton>
       </div>
 
-      <TabBar active="map" />
+      <TabBar active="home" onTab={onTab} />
     </div>
   );
 }
