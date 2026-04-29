@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Hand, Calendar } from 'lucide-react';
+import { ArrowLeft, Users, Hand, Calendar, ChevronDown } from 'lucide-react';
 import StickerCard from '../components/StickerCard';
 import Chip from '../components/Chip';
 import CompanionAvatar from '../components/CompanionAvatar';
@@ -10,6 +10,8 @@ const GENDER_BG: Record<Companion['genderMix'], string> = {
   여: 'bg-accentPink',
   혼성: 'bg-accentLime',
 };
+
+const FILTERS = ['여행 일정', '성별', '일행 수'] as const;
 
 export type RegionDetailScreenProps = {
   regionId: string;
@@ -35,7 +37,22 @@ export default function RegionDetailScreen({ regionId, onBack, onPokeTap }: Regi
         <Chip bg="bg-primary"><span className="font-mono">{region.count}명</span></Chip>
       </div>
 
-      <div className="px-4 pt-3 pb-1 flex items-center gap-1.5 text-[12px] text-textMuted">
+      <div className="px-4 pt-3 pb-1 flex gap-2">
+        {FILTERS.map((label) => (
+          <StickerCard
+            key={label}
+            offset="xs"
+            rounded="pill"
+            pressable
+            className="px-3 py-1.5 flex items-center gap-1.5 shrink-0"
+          >
+            <span className="text-[13px] font-bold text-outline whitespace-nowrap">{label}</span>
+            <ChevronDown size={14} color="#2A2A2A" strokeWidth={2.5} />
+          </StickerCard>
+        ))}
+      </div>
+
+      <div className="px-4 pt-2 pb-1 flex items-center gap-1.5 text-[12px] text-textMuted">
         <Hand size={13} strokeWidth={2.25} />
         <span>카드를 탭하면 콕을 보낼 수 있어요</span>
       </div>
