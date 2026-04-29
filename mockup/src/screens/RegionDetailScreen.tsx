@@ -1,9 +1,16 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Users } from 'lucide-react';
 import StickerCard from '../components/StickerCard';
 import StickerButton from '../components/StickerButton';
 import Chip from '../components/Chip';
+import CompanionAvatar from '../components/CompanionAvatar';
 import { companions, Companion } from '../data/companions';
 import { regions } from '../data/regions';
+
+const GENDER_BG: Record<Companion['genderMix'], string> = {
+  남: 'bg-surface',
+  여: 'bg-accentPink',
+  혼성: 'bg-accentLime',
+};
 
 export type RegionDetailScreenProps = {
   regionId: string;
@@ -41,18 +48,30 @@ export default function RegionDetailScreen({ regionId, onBack, onPokeTap }: Regi
             onClick={() => onPokeTap?.(c)}
           >
             <div className="flex gap-3">
-              <div className={`${c.avatarBg} w-16 h-16 rounded-lg border-[2.5px] border-outline flex items-center justify-center text-[24px] font-extrabold`}>
-                {c.nickname[0]}
-              </div>
+              <CompanionAvatar
+                photoUrl={c.photoUrl}
+                fallbackBg={c.avatarBg}
+                fallbackLetter={c.nickname[0]}
+                size={68}
+              />
               <div className="flex-1 min-w-0">
-                <div className="flex items-baseline gap-1.5">
-                  <span className="font-extrabold text-[16px] text-outline truncate">{c.nickname}</span>
-                  <span className="text-[12px] font-mono text-textMuted">{c.age}·{c.gender}</span>
+                <div className="font-extrabold text-[16px] text-outline truncate">{c.nickname}</div>
+                <div className="flex gap-1.5 mt-1.5 flex-wrap">
+                  <Chip size="sm">
+                    <span className="inline-flex items-center gap-1">
+                      <Users size={11} strokeWidth={2.5} />
+                      <span className="font-mono">{c.groupSize}명</span>
+                    </span>
+                  </Chip>
+                  <Chip size="sm">
+                    <span className="font-mono">평균 {c.avgAge}세</span>
+                  </Chip>
+                  <Chip size="sm" bg={GENDER_BG[c.genderMix]}>{c.genderMix}</Chip>
                 </div>
-                <p className="text-[14px] text-outline mt-1 leading-snug">{c.intro}</p>
+                <p className="text-[14px] text-outline mt-2 leading-snug">{c.intro}</p>
                 <div className="flex gap-1.5 mt-2 flex-wrap">
                   {c.tags.map((t) => (
-                    <Chip key={t} size="sm">{t}</Chip>
+                    <Chip key={t} size="sm" bg="bg-surfaceMuted">{t}</Chip>
                   ))}
                 </div>
               </div>
