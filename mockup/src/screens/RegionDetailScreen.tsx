@@ -1,6 +1,5 @@
-import { ArrowLeft, Users } from 'lucide-react';
+import { ArrowLeft, Users, Hand } from 'lucide-react';
 import StickerCard from '../components/StickerCard';
-import StickerButton from '../components/StickerButton';
 import Chip from '../components/Chip';
 import CompanionAvatar from '../components/CompanionAvatar';
 import { companions, Companion } from '../data/companions';
@@ -36,40 +35,48 @@ export default function RegionDetailScreen({ regionId, onBack, onPokeTap }: Regi
         <Chip bg="bg-primary"><span className="font-mono">{region.count}명</span></Chip>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-5 pb-32">
+      <div className="px-4 pt-3 pb-1 flex items-center gap-1.5 text-[12px] text-textMuted">
+        <Hand size={13} strokeWidth={2.25} />
+        <span>카드를 탭하면 콕을 보낼 수 있어요</span>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-5 pb-6">
         {companions.map((c) => (
           <StickerCard
             key={c.id}
             offset="md"
             rotate={rotateForId(c.id)}
             rounded="lg"
-            className="p-4"
+            className="p-3.5"
             pressable
             onClick={() => onPokeTap?.(c)}
           >
-            <div className="flex gap-3">
+            <div className="flex gap-3.5 items-stretch">
               <CompanionAvatar
                 photoUrl={c.photoUrl}
                 fallbackBg={c.avatarBg}
                 fallbackLetter={c.nickname[0]}
-                size={68}
+                width={76}
               />
-              <div className="flex-1 min-w-0">
-                <div className="font-extrabold text-[16px] text-outline truncate">{c.nickname}</div>
-                <div className="flex gap-1.5 mt-1.5 flex-wrap">
-                  <Chip size="sm">
-                    <span className="inline-flex items-center gap-1">
-                      <Users size={11} strokeWidth={2.5} />
-                      <span className="font-mono">{c.groupSize}명</span>
-                    </span>
-                  </Chip>
-                  <Chip size="sm">
-                    <span className="font-mono">평균 {c.avgAge}세</span>
-                  </Chip>
+              <div className="flex-1 min-w-0 flex flex-col">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="font-extrabold text-[16px] text-outline truncate leading-tight">
+                    {c.nickname}
+                  </span>
                   <Chip size="sm" bg={GENDER_BG[c.genderMix]}>{c.genderMix}</Chip>
                 </div>
-                <p className="text-[14px] text-outline mt-2 leading-snug">{c.intro}</p>
-                <div className="flex gap-1.5 mt-2 flex-wrap">
+                <div className="flex items-center gap-2 mt-1.5 text-[12px] font-mono text-textMuted">
+                  <span className="inline-flex items-center gap-1 text-outline font-semibold">
+                    <Users size={12} strokeWidth={2.5} />
+                    {c.groupSize}명
+                  </span>
+                  <span className="text-outline opacity-30">·</span>
+                  <span className="text-outline font-semibold">평균 {c.avgAge}세</span>
+                </div>
+                <p className="text-[13.5px] text-outline mt-2 leading-snug line-clamp-2">
+                  {c.intro}
+                </p>
+                <div className="flex gap-1.5 mt-auto pt-2 flex-wrap">
                   {c.tags.map((t) => (
                     <Chip key={t} size="sm" bg="bg-surfaceMuted">{t}</Chip>
                   ))}
@@ -78,16 +85,6 @@ export default function RegionDetailScreen({ regionId, onBack, onPokeTap }: Regi
             </div>
           </StickerCard>
         ))}
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 px-4 py-4 bg-cream border-t-[1.5px] border-outline">
-        <StickerButton
-          variant="primary"
-          fullWidth
-          onClick={() => onPokeTap?.(companions[0])}
-        >
-          콕 보내기 (1코인)
-        </StickerButton>
       </div>
     </div>
   );

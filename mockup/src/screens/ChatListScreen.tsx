@@ -21,7 +21,8 @@ export default function ChatListScreen({ onTab }: ChatListScreenProps) {
               <CompanionAvatar
                 fallbackBg={c.avatarBg}
                 fallbackLetter={c.nickname[0]}
-                size={52}
+                width={52}
+                height={52}
               />
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline justify-between gap-2">
