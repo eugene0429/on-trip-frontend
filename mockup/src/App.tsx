@@ -1,20 +1,13 @@
-import Chip from './components/Chip';
-import CoinBadge from './components/CoinBadge';
+import PinMarker from './components/PinMarker';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-cream p-8 flex flex-col gap-6 font-sans">
-      <div className="flex gap-2 flex-wrap">
-        <Chip>맛집</Chip>
-        <Chip bg="bg-primary">술자리</Chip>
-        <Chip bg="bg-accentPink">액티비티</Chip>
-        <Chip bg="bg-accentLime">관광</Chip>
-        <Chip size="sm">sm</Chip>
-      </div>
-      <div className="flex gap-3 items-center">
-        <CoinBadge count={3} size="sm" />
-        <CoinBadge count={12} size="md" />
-        <CoinBadge count={99} size="lg" />
+    <div className="min-h-screen bg-cream p-8 font-sans">
+      <div className="relative w-[600px] h-[400px] bg-surfaceMuted border-[2.5px] border-outline rounded-lg">
+        <PinMarker count={3}  name="잠실"  position={{ x: 20, y: 30 }} />
+        <PinMarker count={12} name="이태원" position={{ x: 45, y: 50 }} />
+        <PinMarker count={45} name="신촌"  position={{ x: 70, y: 30 }} />
+        <PinMarker count={88} name="강남"  position={{ x: 50, y: 80 }} />
       </div>
     </div>
   );
