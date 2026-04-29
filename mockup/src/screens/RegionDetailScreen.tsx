@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Hand } from 'lucide-react';
+import { ArrowLeft, Users, Hand, Clock } from 'lucide-react';
 import StickerCard from '../components/StickerCard';
 import Chip from '../components/Chip';
 import CompanionAvatar from '../components/CompanionAvatar';
@@ -79,10 +79,28 @@ export default function RegionDetailScreen({ regionId, onBack, onPokeTap }: Regi
               </div>
             </div>
 
-            <div className="mt-3 pt-2.5 border-t-[1.5px] border-dashed border-outline/30 flex gap-1.5 flex-wrap">
-              {c.tags.map((t) => (
-                <Chip key={t} size="sm" bg="bg-surfaceMuted">{t}</Chip>
-              ))}
+            <div className="mt-3 pt-2.5 border-t-[1.5px] border-dashed border-outline/30 flex items-center gap-2">
+              <div className="flex gap-1.5 flex-wrap flex-1 min-w-0">
+                {c.tags.map((t) => (
+                  <Chip key={t} size="sm" bg="bg-surfaceMuted">{t}</Chip>
+                ))}
+              </div>
+              <div className="flex items-center gap-1.5 text-[11px] font-mono shrink-0">
+                <span
+                  className={`inline-block w-2 h-2 rounded-pill border-[1.5px] border-outline ${c.isActive ? 'bg-accentLime' : 'bg-surfaceMuted'}`}
+                  aria-hidden
+                />
+                {c.isActive ? (
+                  <span className="text-outline font-bold">활동 중</span>
+                ) : (
+                  <span className="text-textMuted">대기</span>
+                )}
+                <span className="text-outline opacity-30">·</span>
+                <span className="inline-flex items-center gap-1 text-textMuted">
+                  <Clock size={11} strokeWidth={2.25} />
+                  {c.postedAt}
+                </span>
+              </div>
             </div>
           </StickerCard>
         ))}
