@@ -4,15 +4,26 @@ import DeviceFrame from './components/DeviceFrame';
 import MapScreen from './screens/MapScreen';
 import RegionDetailScreen from './screens/RegionDetailScreen';
 import PokeModal from './screens/PokeModal';
+import ChatListScreen from './screens/ChatListScreen';
+import MyProfileScreen from './screens/MyProfileScreen';
 import StickerButton from './components/StickerButton';
+import { TabKey } from './components/TabBar';
 import { Companion, companions } from './data/companions';
 
 type ViewMode = 'storyboard' | 'single';
-type Screen = 'map' | 'region-detail';
+type Screen = 'map' | 'region-detail' | 'chat-list' | 'my-profile';
 
 const SCREEN_LABELS: Record<Screen, string> = {
   map: 'Map',
   'region-detail': 'Region Detail',
+  'chat-list': 'Chat',
+  'my-profile': 'My',
+};
+
+const TAB_TO_SCREEN: Record<TabKey, Screen> = {
+  chat: 'chat-list',
+  home: 'map',
+  my: 'my-profile',
 };
 
 export default function App() {
@@ -26,6 +37,11 @@ export default function App() {
     setCurrentScreen(screen);
     setPokeTarget(options?.openPoke ? companions[0] : null);
     setViewMode('single');
+  };
+
+  const handleTab = (key: TabKey) => {
+    setCurrentScreen(TAB_TO_SCREEN[key]);
+    setPokeTarget(null);
   };
 
   return (
@@ -61,6 +77,7 @@ export default function App() {
           onPokeTap={(c) => setPokeTarget(c)}
           onPokeClose={() => setPokeTarget(null)}
           onPokeSend={() => setPokeTarget(null)}
+          onTab={handleTab}
           screenLabel={SCREEN_LABELS[currentScreen]}
         />
       )}
@@ -135,6 +152,7 @@ type SingleDeviceProps = {
   onPokeTap: (c: Companion) => void;
   onPokeClose: () => void;
   onPokeSend: (msg: string) => void;
+  onTab: (key: TabKey) => void;
   screenLabel: string;
 };
 
@@ -147,11 +165,12 @@ function SingleDevice({
   onPokeTap,
   onPokeClose,
   onPokeSend,
+  onTab,
   screenLabel,
 }: SingleDeviceProps) {
   return (
     <DeviceFrame label={screenLabel}>
-      {currentScreen === 'map' && <MapScreen onPinTap={onPinTap} />}
+      {currentScreen === 'map' && <MapScreen onPinTap={onPinTap} onTab={onTab} />}
       {currentScreen === 'region-detail' && (
         <RegionDetailScreen
           regionId={activeRegionId}
@@ -159,6 +178,8 @@ function SingleDevice({
           onPokeTap={onPokeTap}
         />
       )}
+      {currentScreen === 'chat-list' && <ChatListScreen onTab={onTab} />}
+      {currentScreen === 'my-profile' && <MyProfileScreen onTab={onTab} />}
       <PokeModal
         open={pokeTarget !== null}
         target={pokeTarget}
