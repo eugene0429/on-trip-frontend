@@ -10,10 +10,8 @@ export type Companion = {
   avgAge: number;
   genderMix: GenderMix;
   avatarBg: string;
-  /** 등록한지 얼마나 됐는지 — 사람 친화 텍스트 */
-  postedAt: string;
-  /** 지금 활동 중 (앱 켬) */
-  isActive: boolean;
+  /** 여행 기간 — 사람 친화 텍스트 (예: "4/29 ~ 5/2", "4/29 (당일)") */
+  travelPeriod: string;
 };
 
 export const companions: Companion[] = [
@@ -26,8 +24,7 @@ export const companions: Companion[] = [
     avgAge: 24,
     genderMix: '혼성',
     avatarBg: 'bg-accentPink',
-    postedAt: '5분 전',
-    isActive: true,
+    travelPeriod: '4/29 ~ 5/2',
   },
   {
     id: 2,
@@ -38,8 +35,7 @@ export const companions: Companion[] = [
     avgAge: 27,
     genderMix: '남',
     avatarBg: 'bg-primary',
-    postedAt: '1시간 전',
-    isActive: false,
+    travelPeriod: '4/29 ~ 4/30',
   },
   {
     id: 3,
@@ -50,8 +46,7 @@ export const companions: Companion[] = [
     avgAge: 22,
     genderMix: '여',
     avatarBg: 'bg-accentLime',
-    postedAt: '방금 전',
-    isActive: true,
+    travelPeriod: '5/1 ~ 5/5',
   },
   {
     id: 4,
@@ -62,8 +57,7 @@ export const companions: Companion[] = [
     avgAge: 29,
     genderMix: '남',
     avatarBg: 'bg-accentRed',
-    postedAt: '3시간 전',
-    isActive: false,
+    travelPeriod: '4/28 ~ 5/3',
   },
   {
     id: 5,
@@ -74,7 +68,6 @@ export const companions: Companion[] = [
     avgAge: 25,
     genderMix: '혼성',
     avatarBg: 'bg-surface',
-    postedAt: '30분 전',
-    isActive: true,
+    travelPeriod: '4/29 (당일)',
   },
 ];
