@@ -56,16 +56,16 @@ export default function RegionDetailScreen({ regionId, onBack, onPokeTap }: Regi
                 photoUrl={c.photoUrl}
                 fallbackBg={c.avatarBg}
                 fallbackLetter={c.nickname[0]}
-                width={76}
+                width={96}
               />
-              <div className="flex-1 min-w-0 flex flex-col">
+              <div className="flex-1 min-w-0 flex flex-col justify-center gap-1.5">
                 <div className="flex items-baseline justify-between gap-2">
-                  <span className="font-extrabold text-[16px] text-outline truncate leading-tight">
+                  <span className="font-extrabold text-[17px] text-outline truncate leading-tight">
                     {c.nickname}
                   </span>
                   <Chip size="sm" bg={GENDER_BG[c.genderMix]}>{c.genderMix}</Chip>
                 </div>
-                <div className="flex items-center gap-2 mt-1.5 text-[12px] font-mono text-textMuted">
+                <div className="flex items-center gap-2 text-[12px] font-mono">
                   <span className="inline-flex items-center gap-1 text-outline font-semibold">
                     <Users size={12} strokeWidth={2.5} />
                     {c.groupSize}명
@@ -73,15 +73,16 @@ export default function RegionDetailScreen({ regionId, onBack, onPokeTap }: Regi
                   <span className="text-outline opacity-30">·</span>
                   <span className="text-outline font-semibold">평균 {c.avgAge}세</span>
                 </div>
-                <p className="text-[13.5px] text-outline mt-2 leading-snug line-clamp-2">
+                <p className="text-[13.5px] text-outline leading-snug line-clamp-2">
                   {c.intro}
                 </p>
-                <div className="flex gap-1.5 mt-auto pt-2 flex-wrap">
-                  {c.tags.map((t) => (
-                    <Chip key={t} size="sm" bg="bg-surfaceMuted">{t}</Chip>
-                  ))}
-                </div>
               </div>
+            </div>
+
+            <div className="mt-3 pt-2.5 border-t-[1.5px] border-dashed border-outline/30 flex gap-1.5 flex-wrap">
+              {c.tags.map((t) => (
+                <Chip key={t} size="sm" bg="bg-surfaceMuted">{t}</Chip>
+              ))}
             </div>
           </StickerCard>
         ))}
