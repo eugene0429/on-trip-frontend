@@ -74,6 +74,7 @@ export default function StickerButton({
         rounded="xl"
         border={border}
         pressable={!disabled}
+        noShadow={variant === 'ghost' || disabled}
         onPress={disabled ? undefined : onPress}
       >
         {inner}

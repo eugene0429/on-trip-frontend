@@ -14,6 +14,8 @@ export type StickerCardProps = {
   rounded?: Rounded;
   pressable?: boolean;
   onPress?: () => void;
+  /** 그림자 레이어 끔 (transparent bg 인 ghost variant 등에서 그림자가 카드 안으로 비쳐 보이는 문제 회피) */
+  noShadow?: boolean;
   style?: StyleProp<ViewStyle>;
   children: ReactNode;
 };
@@ -26,6 +28,7 @@ export default function StickerCard({
   rounded = 'lg',
   pressable = false,
   onPress,
+  noShadow = false,
   style,
   children,
 }: StickerCardProps) {
@@ -40,10 +43,12 @@ export default function StickerCard({
     borderWidth,
     borderColor: colors.outline,
     borderRadius: radius,
-    transform: [
-      { translateX: pressed ? offsetPx : 0 },
-      { translateY: pressed ? offsetPx : 0 },
-    ],
+    transform: noShadow
+      ? []
+      : [
+          { translateX: pressed ? offsetPx : 0 },
+          { translateY: pressed ? offsetPx : 0 },
+        ],
   };
 
   const wrapperStyle: ViewStyle = {
@@ -63,7 +68,7 @@ export default function StickerCard({
   if (pressable) {
     return (
       <View style={wrapperStyle}>
-        <View style={shadowStyle} />
+        {!noShadow && <View style={shadowStyle} />}
         <Pressable
           onPressIn={() => setPressed(true)}
           onPressOut={() => setPressed(false)}
@@ -78,7 +83,7 @@ export default function StickerCard({
 
   return (
     <View style={wrapperStyle}>
-      <View style={shadowStyle} />
+      {!noShadow && <View style={shadowStyle} />}
       <View style={[cardBaseStyle, style]}>{children}</View>
     </View>
   );
