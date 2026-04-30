@@ -13,6 +13,9 @@
     "android": {
       "package": "com.ontrip.app"
     },
+    "web": {
+      "bundler": "metro"
+    },
     "plugins": [],
     "experiments": {
       "typedRoutes": false
