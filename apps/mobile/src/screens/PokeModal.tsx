@@ -145,14 +145,9 @@ export default function PokeModal({ open, target, coinBalance = 12, onClose, onS
                     onChangeText={setMessage}
                   />
 
-                  <View style={{ gap: 12 }}>
-                    <StickerButton variant="primary" fullWidth onPress={() => onSend(message)}>
-                      콕 발사
-                    </StickerButton>
-                    <StickerButton variant="ghost" fullWidth onPress={onClose}>
-                      취소
-                    </StickerButton>
-                  </View>
+                  <StickerButton variant="primary" fullWidth onPress={() => onSend(message)}>
+                    콕 발사
+                  </StickerButton>
                 </View>
               </Animated.View>
             </KeyboardAvoidingView>
