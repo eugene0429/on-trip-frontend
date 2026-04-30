@@ -26,12 +26,28 @@ on-trip/
 
 ```bash
 pnpm install
-pnpm mobile:start    # Expo dev server
 ```
 
-## 디자인 검수
+### FE 단독 검수 — 두 가지 방법
 
-별도 웹 목업으로 디자인을 검수합니다.
+**A. 웹 브라우저 (가장 빠름, 데스크톱)**
+
+```bash
+pnpm --filter mobile run web    # http://localhost:8081 (또는 8082)
+```
+
+react-native-web 으로 렌더 — 레이아웃·색·타이포는 거의 동일. 일부 네이티브 효과(메커니컬 프레스 등)는 근사치.
+
+**B. 폰 (Expo Go) — 정확한 RN UI**
+
+1. Play Store / App Store 에서 "Expo Go" 설치
+2. `pnpm mobile:start` → 터미널에 QR 코드 출력
+3. 폰으로 QR 스캔 (Android: Expo Go 앱 / iOS: 카메라)
+4. 폰과 PC 가 같은 Wi-Fi 에 있어야 함
+
+## 디자인 시안 검수 (mockup)
+
+본 RN 앱과 별개의 웹 목업 — 디자인 픽스 및 의견 수렴 단계용.
 
 ```bash
 cd mockup
