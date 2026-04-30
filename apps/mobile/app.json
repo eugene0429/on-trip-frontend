@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "on-trip",
+    "slug": "on-trip",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "scheme": "ontrip",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.ontrip.app"
+    },
+    "android": {
+      "package": "com.ontrip.app"
+    },
+    "plugins": [],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}

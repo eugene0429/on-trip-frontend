@@ -1,0 +1,22 @@
+node_modules
+.DS_Store
+*.local
+*.tsbuildinfo
+.env
+.env.local
+
+# Expo
+.expo
+.expo-shared
+dist
+web-build
+
+# Metro
+.metro-cache
+
+# IDE
+.vscode
+.idea
+
+# OS
+Thumbs.db

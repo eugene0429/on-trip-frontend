@@ -1,0 +1,19 @@
+{
+  "name": "on-trip",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "mobile": "pnpm --filter mobile",
+    "mobile:start": "pnpm --filter mobile start",
+    "typecheck": "pnpm -r --parallel run typecheck",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3"
+  }
+}
